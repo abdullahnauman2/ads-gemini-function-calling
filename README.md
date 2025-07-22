@@ -1,5 +1,7 @@
 simple function calling demo that answers questions by querying json data
 
+see `data/ads-data.json` for fake data
+
 ## run locally
 
 ```bash
