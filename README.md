@@ -1,6 +1,6 @@
 simple function calling demo that answers questions by querying json data
 
-see `data/ads-data.json` for fake data
+see `data/ads-data.json` for sample data
 
 ## run locally
 
@@ -10,5 +10,3 @@ cd google-ads-gemini
 npm install
 npm run dev
 ```
-
-open http://localhost:3000
