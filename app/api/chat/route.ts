@@ -86,15 +86,26 @@ const queryAdsDataFunction = {
 
 export async function POST(req: NextRequest) {
   try {
-    const { message } = await req.json();
+    const { message, history } = await req.json();
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash-001",
+      model: "gemini-2.5-flash",
       tools: [{ function_declarations: [queryAdsDataFunction] }],
     });
 
+    // Convert history to Gemini format
+    const chatHistory = history?.map((msg: any) => ({
+      role: msg.type === 'user' ? 'user' : 'model',
+      parts: [{ text: msg.content }]
+    })) || [];
+
+    // Start a chat session with history
+    const chat = model.startChat({
+      history: chatHistory
+    });
+
     // First call to Gemini - it will decide if it needs to call the function
-    const result = await model.generateContent(message);
+    const result = await chat.sendMessage(message);
     const response = await result.response;
 
     // Check if Gemini wants to call our function
@@ -117,7 +128,7 @@ ${JSON.stringify(queryResult, null, 2)}
 Please provide a helpful, natural language response that answers the user's question using this data. Focus on the key insights and present the information in an easy-to-understand way.
       `;
 
-      const followUpResult = await model.generateContent(followUpPrompt);
+      const followUpResult = await chat.sendMessage(followUpPrompt);
       const finalResponse = await followUpResult.response;
 
       return NextResponse.json({
