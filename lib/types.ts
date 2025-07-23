@@ -71,3 +71,21 @@ export interface QueryResult {
   count: number;
   data: Campaign[] | AdGroup[] | Ad[];
 }
+
+export interface ChatMessage {
+  id: string;
+  type: "user" | "assistant";
+  content: string;
+  timestamp: Date;
+  debugInfo?: {
+    functionCalled: boolean;
+    rawData?: any;
+    processingTime?: number;
+  };
+}
+
+export interface ChatResponse {
+  response: string;
+  data?: any;
+  functionCalled?: boolean;
+}
