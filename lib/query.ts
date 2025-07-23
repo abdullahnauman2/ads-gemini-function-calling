@@ -14,15 +14,13 @@ export function queryAdsData(params: QueryParams): QueryResult {
   const {
     entity_type,
     filters = {},
-    metrics = [],
-    aggregation,
     limit,
     sort_by,
   } = params;
 
 
   // Get the data for the requested entity type
-  let results = typedAdsData[entity_type] || [];
+  let results: (Campaign | AdGroup | Ad)[] = typedAdsData[entity_type] || [];
 
   // Apply filters dynamically
   Object.entries(filters).forEach(([key, value]) => {
@@ -35,7 +33,7 @@ export function queryAdsData(params: QueryParams): QueryResult {
           const endDate = new Date(value.end_date);
           return itemDate >= startDate && itemDate <= endDate;
         }
-        const itemValue = (item as Record<string, any>)[key];
+        const itemValue = (item as Record<string, unknown>)[key];
         const exactMatch = itemValue === value;
         const partialMatch = itemValue && itemValue.toString().toLowerCase().includes(value.toLowerCase());
         return exactMatch || partialMatch;
@@ -46,8 +44,8 @@ export function queryAdsData(params: QueryParams): QueryResult {
   // Sort results if requested
   if (sort_by) {
     results.sort((a, b) => {
-      const aVal = (a as Record<string, number>)[sort_by] || 0;
-      const bVal = (b as Record<string, number>)[sort_by] || 0;
+      const aVal = (a as Record<string, unknown>)[sort_by] as number || 0;
+      const bVal = (b as Record<string, unknown>)[sort_by] as number || 0;
       return bVal - aVal; // Descending order
     });
   }
@@ -60,6 +58,6 @@ export function queryAdsData(params: QueryParams): QueryResult {
   return {
     entity_type,
     count: results.length,
-    data: results,
+    data: results as Campaign[] | AdGroup[] | Ad[],
   };
 }

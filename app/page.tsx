@@ -105,7 +105,7 @@ export default function Home() {
       }}>
         <div style={{display: 'flex', alignItems: 'center'}}>
           <div>
-            <h1 style={{margin: '0', fontSize: '18px', fontWeight: 'bold'}}>Google Ads Demo</h1>
+            <h1 style={{margin: '0', fontSize: '18px', fontWeight: 'bold'}}>Google</h1>
           </div>
         </div>
       </div>
@@ -122,12 +122,6 @@ export default function Home() {
             textAlign: 'center'
           }}>
             <div style={{marginBottom: '30px', maxWidth: '400px'}}>
-              <h2 style={{fontSize: '24px', fontWeight: 'bold', margin: '0 0 10px 0'}}>
-                Ask about your Google Ads data
-              </h2>
-              <p style={{color: '#666', margin: '0', fontSize: '14px'}}>
-                Get insights from your campaigns, ad groups, and performance metrics with AI-powered analysis.
-              </p>
             </div>
           </div>
         ) : (
@@ -247,7 +241,8 @@ export default function Home() {
               border: '1px solid #ccc',
               resize: 'none',
               fontFamily: 'Arial, sans-serif',
-              fontSize: '14px'
+              fontSize: '14px',
+              marginBottom: '16px'
             }}
             rows={1}
             disabled={loading}
