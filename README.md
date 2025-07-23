@@ -1,6 +1,6 @@
 simple function calling demo that answers questions by querying json data
 
-see `data/ads-data.json` for sample data
+see `data/sample-data.json` for sample data
 
 ## run locally
 

@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
-import { queryAdsData } from "@/lib/ads-query";
+import { queryAdsData } from "@/lib/query";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 

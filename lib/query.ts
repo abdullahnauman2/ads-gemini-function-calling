@@ -5,8 +5,8 @@ import {
   Campaign,
   AdGroup,
   Ad,
-} from "@/types/ads";
-import adsData from "../data/ads-data.json";
+} from "./types";
+import adsData from "../data/sample-data.json";
 
 const typedAdsData = adsData as AdsData;
 
